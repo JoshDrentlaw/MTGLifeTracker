@@ -1,6 +1,7 @@
 package com.example.mtglifetracker
 
 import android.os.Bundle
+import android.widget.GridLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -54,23 +57,24 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Tracker(modifier: Modifier = Modifier) {
-    Column (
+    LazyVerticalGrid (
+        GridCells.Adaptive(minSize = 100.dp),
         modifier
             .fillMaxSize()
             .background(color = colorResource(id = R.color.teal_200))
     ) {
-        LifeBox(modifier)
-        LifeBox(modifier = modifier)
+        items()
+
+        LifeBox()
     }
 }
 
 @Composable
-fun LifeBox(modifier: Modifier) {
+fun LifeBox(modifier: Modifier = modifier) {
     Column (
         modifier
             .background(colorResource(id = R.color.black))
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
